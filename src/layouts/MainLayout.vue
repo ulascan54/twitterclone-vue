@@ -5,7 +5,7 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title class="text-weight-bold">
-          <span class="gt-sm">Çıldırttır</span>
+          <span class="gt-sm">{{ $route.name }}</span>
           <q-icon
             name="fas fa-dog lt-md"
             size="lg"
@@ -26,9 +26,11 @@
       class="bg-black"
       bordered
     >
-     <q-toolbar-title class="text-weight-bold">
-          <span class="lt-md text-white absolute-left q-mt-lg q-ml-md q-pl-xl ">Çıldırttır</span>
-        </q-toolbar-title>
+      <q-toolbar-title class="text-weight-bold">
+        <span class="lt-md text-white absolute-left q-mt-lg q-ml-md q-pl-xl"
+          >Çıldırttır</span
+        >
+      </q-toolbar-title>
 
       <q-icon name="fas fa-dog" size="lg" color="white" class="q-pa-md" />
       <q-list class="text-white">
@@ -36,24 +38,28 @@
           clickable
           v-ripple
           to="/"
-          active-class="text-white text-weight-bold"
+          exact
+          class="text-h6"
+          active-class=" text-weight-bold text-grey-6"
         >
           <q-item-section avatar>
             <q-icon name="cottage" size="md" />
           </q-item-section>
-          <q-item-section class="text-h6">Home</q-item-section>
+          <q-item-section>Home</q-item-section>
         </q-item>
 
         <q-item
           clickable
           v-ripple
           to="/about"
-          active-class="text-white text-weight-bold"
+          exact
+          class="text-h6"
+          active-class="text-weight-bold text-grey-6"
         >
           <q-item-section avatar>
             <q-icon name="fas fa-question-circle" size="md" />
           </q-item-section>
-          <q-item-section class="text-h6">About</q-item-section>
+          <q-item-section>About</q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
