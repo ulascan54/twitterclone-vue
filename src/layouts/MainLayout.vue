@@ -79,7 +79,7 @@
         outlined
         dense
         label="Search"
-        label-color="grey-4"
+        dark
       >
         <template v-slot:prepend>
           <q-icon name="search" color="grey-4" />
@@ -142,7 +142,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container class="bg-black text-white">
+    <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
