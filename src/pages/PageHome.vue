@@ -122,6 +122,7 @@
 </template>
 
 <script>
+import db from "src/boot/firebase";
 import { formatDistance } from "date-fns";
 
 export default {
@@ -130,16 +131,16 @@ export default {
     return {
       newTweetContent: null,
       tweets: [
-        {
-          content:
-            " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
-          date: 1631040233608,
-        },
-        {
-          content:
-            " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
-          date: 1631050233608,
-        },
+        // {
+        //   content:
+        //     " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
+        //   date: 1631040233608,
+        // },
+        // {
+        //   content:
+        //     " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
+        //   date: 1631050233608,
+        // },
       ],
     };
   },
@@ -153,7 +154,12 @@ export default {
         content: this.newTweetContent,
         date: Date.now(),
       };
-      this.tweets.unshift(newTweet);
+      // this.tweets.unshift(newTweet);
+      db.collection('tweets').add(newTweet).then(function(docRef){
+        console.log('Document written with ID:', docRef.id)
+      }).catch(function(error){
+        console.error('Error adding document:',error)
+      })
       this.newTweetContent = "";
     },
     deleteTweet(tweet) {
@@ -162,6 +168,29 @@ export default {
       this.tweets.splice(index, 1);
     },
   },
+
+mounted() {
+    db.collection('tweets').orderBy('date').onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        let tweetChance = change.doc.data()
+        tweetChance.id = change.doc.id
+        if (change.type === 'added') {
+          console.log('New tweet: ', tweetChance)
+          this.tweets.unshift(tweetChance)
+        }
+        if (change.type === 'modified') {
+          console.log('Modified tweet: ', tweetChance)
+          let index = this.tweets.findIndex(tweet => tweet.id === tweetChance.id)
+          Object.assign(this.qweets[index], tweetChance)
+        }
+        if (change.type === 'removed') {
+          console.log('Removed tweet: ', tweetChance)
+          let index = this.tweets.findIndex(tweet => tweet.id === tweetChance.id)
+          this.tweets.splice(index, 1)
+        }
+      })
+    })
+  }
 };
 </script>
 <style lang="sass">

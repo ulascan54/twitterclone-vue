@@ -38,7 +38,7 @@
       :width="283"
       side="left"
       class="bg-black"
-      style="border-top: 1px solid black"
+      style="border-top: 1px solid black; z-index:1;"
     >
       <q-toolbar-title class="text-weight-bold">
         <span class="text-white absolute-left q-mt-lg q-ml-md q-pl-xl"
@@ -157,7 +157,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view style="border: 1px solid #ffffff40" />
+      <router-view style="border: 1px solid #ffffff40; z-index:0;" />
     </q-page-container>
   </q-layout>
 </template>
