@@ -21,7 +21,7 @@
         <q-toolbar-title class="text-weight-bold">
           <span class="gt-sm">{{ $route.name }}</span>
           <q-icon
-            name="fas fa-dog lt-md"
+            name="fas fa-dove lt-md"
             size="lg"
             color="white"
             class="q-pa-md absolute-center"
@@ -46,7 +46,7 @@
         >
       </q-toolbar-title>
 
-      <q-icon name="fas fa-dog" size="lg" color="white" class="q-pa-md" />
+      <q-icon name="fas fa-dove" size="lg" color="white" class="q-pa-md" />
       <q-list class="text-grey-6">
         <q-item
           clickable

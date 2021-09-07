@@ -56,7 +56,7 @@
           <q-item
             class="q-py-md"
             v-for="item in tweets"
-            :key="item.date"
+            :key="item.id"
             style="border-bottom: 1px solid #ffffff40"
           >
             <q-item-section avatar top>
@@ -163,9 +163,15 @@ export default {
       this.newTweetContent = "";
     },
     deleteTweet(tweet) {
-      let dateToDelete = tweet.date;
-      let index = this.tweets.findIndex((t) => t.date === dateToDelete);
-      this.tweets.splice(index, 1);
+      // let dateToDelete = tweet.date;
+      // let index = this.tweets.findIndex((t) => t.date === dateToDelete);
+      // this.tweets.splice(index, 1);
+        db.collection('tweets').doc(tweet.id).delete()
+        .then(function(){
+        console.log("Document successfully deleted !")})
+        .catch(function(error){
+        console.error('Error adding document:',error)
+      })
     },
   },
 
