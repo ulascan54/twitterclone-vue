@@ -44,67 +44,74 @@
       </div>
     </div>
     <q-separator class="bg-grey-8" />
-    <q-list>
-      <q-item
-        class="q-py-md"
-        v-for="item in tweets"
-        :key="item.date"
-        style="border-bottom: 1px solid #ffffff40"
-      >
-        <q-item-section avatar top>
-          <q-avatar size="xl">
-            <img src="https://avatars.githubusercontent.com/u/39746408?v=4" />
-          </q-avatar>
-        </q-item-section>
 
-        <q-item-section>
-          <q-item-label class="text-subtitle1"
-            ><strong>Ulaş Can Demirbağ </strong>
-            <span class="text-grey-7"> @ulascan54</span>
-          </q-item-label>
-          <q-item-label class="tweet-content text-body-one">
-            {{ item.content }}
-          </q-item-label>
-          <div class="row justify-between q-mt-sm tweet-icons">
-            <q-btn
-              flat
-              round
-              color="grey-7"
-              icon="far fa-comment"
-              size="sm"
-              class="btn-action"
-            />
-            <q-btn
-              flat
-              round
-              color="grey-7"
-              icon="fas fa-retweet"
-              size="sm"
-              class="btn-action"
-            />
-            <q-btn
-              flat
-              round
-              color="grey-7"
-              icon="fas fa-heart"
-              size="sm"
-              class="btn-action"
-            />
-            <q-btn
-              @click="deleteTweet(item)"
-              flat
-              round
-              color="grey-7"
-              icon="fas fa-trash"
-              size="sm"
-              class="btn-action"
-            />
-          </div>
-        </q-item-section>
-        <q-item-section side top>
-          {{ relativeDate(item.date) }}
-        </q-item-section>
-      </q-item>
+    <q-list>
+      <transition-group
+        appear
+        enter-active-class="animated fadeIn slow"
+        leave-active-class="animated fadeOut slow"
+      >
+        <q-item
+          class="q-py-md"
+          v-for="item in tweets"
+          :key="item.date"
+          style="border-bottom: 1px solid #ffffff40"
+        >
+          <q-item-section avatar top>
+            <q-avatar size="xl">
+              <img src="https://avatars.githubusercontent.com/u/39746408?v=4" />
+            </q-avatar>
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label class="text-subtitle1"
+              ><strong>Ulaş Can Demirbağ </strong>
+              <span class="text-grey-7"> @ulascan54</span>
+            </q-item-label>
+            <q-item-label class="tweet-content text-body-one">
+              {{ item.content }}
+            </q-item-label>
+            <div class="row justify-between q-mt-sm tweet-icons">
+              <q-btn
+                flat
+                round
+                color="grey-7"
+                icon="far fa-comment"
+                size="sm"
+                class="btn-action"
+              />
+              <q-btn
+                flat
+                round
+                color="grey-7"
+                icon="fas fa-retweet"
+                size="sm"
+                class="btn-action"
+              />
+              <q-btn
+                flat
+                round
+                color="grey-7"
+                icon="fas fa-heart"
+                size="sm"
+                class="btn-action"
+              />
+              <q-btn
+                @click="deleteTweet(item)"
+                flat
+                round
+                color="grey-7"
+                icon="fas fa-trash"
+                size="sm"
+                class="btn-action"
+              />
+            </div>
+          </q-item-section>
+          <q-item-section side top>
+            {{ relativeDate(item.date) }}
+          </q-item-section>
+        </q-item>
+      </transition-group>
     </q-list>
   </q-page>
 </template>
@@ -135,18 +142,19 @@ export default {
     relativeDate(value) {
       return formatDistance(value, new Date());
     },
-    addNewTweet(){
-      let newTweet={
-        content:this.newTweetContent,
-        date: Date.now()
-      }
-      this.tweets.unshift(newTweet)
+    addNewTweet() {
+      let newTweet = {
+        content: this.newTweetContent,
+        date: Date.now(),
+      };
+      this.tweets.unshift(newTweet);
+      this.newTweetContent = "";
     },
-    deleteTweet(tweet){
-      let dateToDelete=tweet.date
-      let index=this.tweets.findIndex(t=> t.date === dateToDelete)
-      this.tweets.splice(index,1)
-    }
+    deleteTweet(tweet) {
+      let dateToDelete = tweet.date;
+      let index = this.tweets.findIndex((t) => t.date === dateToDelete);
+      this.tweets.splice(index, 1);
+    },
   },
 };
 </script>
