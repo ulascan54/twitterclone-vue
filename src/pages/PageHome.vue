@@ -44,7 +44,12 @@
     </div>
     <q-separator class="bg-grey-8" />
     <q-list>
-      <q-item class="q-py-md">
+      <q-item
+        class="q-py-md"
+        v-for="item in tweets"
+        :key="item.date"
+        style="border-bottom: 1px solid #ffffff40"
+      >
         <q-item-section avatar top>
           <q-avatar size="xl">
             <img src="https://avatars.githubusercontent.com/u/39746408?v=4" />
@@ -57,35 +62,77 @@
             <span class="text-grey-7"> @ulascan54</span>
           </q-item-label>
           <q-item-label class="tweet-content text-body-one">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste
-            possimus nam voluptatem pariatur obcaecati dolore, maiores facilis
-            illo dolores eaque quos facere temporibus repudiandae repellat
-            itaque qui. 
-            Quis, aliquid quod!
+            {{ item.content }}
           </q-item-label>
           <div class="row justify-between q-mt-sm tweet-icons">
-                <q-btn flat round color="grey-7" icon="far fa-comment" size="sm" class="btn-action"/>
-                <q-btn flat round color="grey-7" icon="fas fa-retweet" size="sm" class="btn-action"/>
-                <q-btn flat round color="grey-7" icon="fas fa-heart" size="sm" class="btn-action"/>
-                <q-btn flat round color="grey-7" icon="fas fa-trash" size="sm" class="btn-action"/>
+            <q-btn
+              flat
+              round
+              color="grey-7"
+              icon="far fa-comment"
+              size="sm"
+              class="btn-action"
+            />
+            <q-btn
+              flat
+              round
+              color="grey-7"
+              icon="fas fa-retweet"
+              size="sm"
+              class="btn-action"
+            />
+            <q-btn
+              flat
+              round
+              color="grey-7"
+              icon="fas fa-heart"
+              size="sm"
+              class="btn-action"
+            />
+            <q-btn
+              flat
+              round
+              color="grey-7"
+              icon="fas fa-trash"
+              size="sm"
+              class="btn-action"
+            />
           </div>
         </q-item-section>
-
-        <q-item-section side top> 1 min ago </q-item-section>
+        <q-item-section side top>
+          {{ relativeDate(item.date) }}
+        </q-item-section>
       </q-item>
-
-      <q-separator class="bg-grey-8" />
     </q-list>
   </q-page>
 </template>
 
 <script>
+import { formatDistance } from "date-fns";
 export default {
   name: "PageHome",
   data() {
     return {
       newTweetContent: null,
+      tweets: [
+        {
+          content:
+            " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
+          date: 1631040233608,
+        },
+        {
+          content:
+            " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
+          date: 1631050233608,
+        },
+      ],
     };
+  },
+
+  methods: {
+    relativeDate(value) {
+      return formatDistance(value, new Date());
+    },
   },
 };
 </script>
