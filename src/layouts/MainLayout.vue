@@ -61,25 +61,59 @@
         outlined
         dense
         label="Search"
-        label-color="white"
+        label-color="grey-4"
       >
         <template v-slot:prepend>
-          <q-icon name="search" color="white"/>
+          <q-icon name="search" color="grey-4" />
         </template>
       </q-input>
-      <q-list bordered padding>
-        <q-item>
+      <q-list padding separator class="bg-grey-9 q-ma-md" style="border-radius:15px;">
+        <q-item class="q-pa-md">
           <q-item-section>
-            <q-item-label overline>OVERLINE</q-item-label>
-            <q-item-label>Single line item</q-item-label>
-            <q-item-label caption
+            <q-item-label overline class="text-grey-5">Eğitim</q-item-label>
+            <q-item-label class="text-weight-bold text-white"
+              >Vue çok çılgın birşey...</q-item-label
+            >
+            <q-item-label caption class="text-grey-5"
               >Secondary line text. Lorem ipsum dolor sit amet, consectetur
               adipiscit elit.</q-item-label
             >
           </q-item-section>
 
           <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
+            <q-item-label caption class="text-grey-6">5 min ago</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item class="q-pa-md">
+          <q-item-section>
+            <q-item-label overline class="text-grey-5">Eğitim</q-item-label>
+            <q-item-label class="text-weight-bold text-white"
+              >Vue çok çılgın birşey...</q-item-label
+            >
+            <q-item-label caption class="text-grey-5"
+              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
+              adipiscit elit.</q-item-label
+            >
+          </q-item-section>
+
+          <q-item-section side top>
+            <q-item-label caption class="text-grey-6">5 min ago</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item class="q-pa-md">
+          <q-item-section>
+            <q-item-label overline class="text-grey-5">Eğitim</q-item-label>
+            <q-item-label class="text-weight-bold text-white"
+              >Vue çok çılgın birşey...</q-item-label
+            >
+            <q-item-label caption class="text-grey-5"
+              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
+              adipiscit elit.</q-item-label
+            >
+          </q-item-section>
+
+          <q-item-section side top>
+            <q-item-label caption class="text-grey-6">5 min ago</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
