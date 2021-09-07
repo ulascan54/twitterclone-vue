@@ -4,7 +4,15 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title class="text-weight-bold"> Home </q-toolbar-title>
+        <q-toolbar-title class="text-weight-bold">
+          <span class="gt-sm">Çıldırttır</span>
+          <q-icon
+            name="fas fa-dog lt-md"
+            size="lg"
+            color="white"
+            class="q-pa-md absolute-center"
+          />
+        </q-toolbar-title>
 
         <q-btn dense flat round icon="auto_awesome" />
       </q-toolbar>
@@ -18,6 +26,10 @@
       class="bg-black"
       bordered
     >
+     <q-toolbar-title class="text-weight-bold">
+          <span class="lt-md text-white absolute-left q-mt-lg q-ml-md q-pl-xl ">Çıldırttır</span>
+        </q-toolbar-title>
+
       <q-icon name="fas fa-dog" size="lg" color="white" class="q-pa-md" />
       <q-list class="text-white">
         <q-item
@@ -67,7 +79,12 @@
           <q-icon name="search" color="grey-4" />
         </template>
       </q-input>
-      <q-list padding separator class="bg-grey-9 q-ma-md" style="border-radius:15px;">
+      <q-list
+        padding
+        separator
+        class="bg-grey-9 q-ma-md"
+        style="border-radius: 15px"
+      >
         <q-item class="q-pa-md">
           <q-item-section>
             <q-item-label overline class="text-grey-5">Eğitim</q-item-label>
