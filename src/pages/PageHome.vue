@@ -32,6 +32,7 @@
       </div>
       <div class="col col-shrink">
         <q-btn
+          @click="addNewTweet"
           :disable="!newTweetContent"
           unelevated
           rounded
@@ -90,6 +91,7 @@
               class="btn-action"
             />
             <q-btn
+              @click="deleteTweet(item)"
               flat
               round
               color="grey-7"
@@ -133,6 +135,18 @@ export default {
     relativeDate(value) {
       return formatDistance(value, new Date());
     },
+    addNewTweet(){
+      let newTweet={
+        content:this.newTweetContent,
+        date: Date.now()
+      }
+      this.tweets.unshift(newTweet)
+    },
+    deleteTweet(tweet){
+      let dateToDelete=tweet.date
+      let index=this.tweets.findIndex(t=> t.date === dateToDelete)
+      this.tweets.splice(index,1)
+    }
   },
 };
 </script>
