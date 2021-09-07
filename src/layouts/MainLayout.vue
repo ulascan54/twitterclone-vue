@@ -1,10 +1,24 @@
 <template>
   <q-layout view="lHr lpR fFf">
-    <q-header bordered class="bg-black text-white">
-      <q-toolbar style="border-bottom:1px solid #ffffff40">
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer"  />
+    <q-header
+      bordered
+      class="bg-black text-white"
+      style="
+        border-left: 1px solid #ffffff40;
+        border-right: 1px solid #ffffff40;
+      "
+    >
+      <q-toolbar>
+        <q-btn
+          dense
+          flat
+          round
+          icon="menu"
+          @click="toggleLeftDrawer"
+          class="lt-md"
+        />
 
-        <q-toolbar-title class="text-weight-bold" >
+        <q-toolbar-title class="text-weight-bold">
           <span class="gt-sm">{{ $route.name }}</span>
           <q-icon
             name="fas fa-dog lt-md"
@@ -24,23 +38,23 @@
       :width="283"
       side="left"
       class="bg-black"
-       style="border-right:1px solid #ffffff40"
+      style="border-top: 1px solid black"
     >
       <q-toolbar-title class="text-weight-bold">
-        <span class="lt-md text-white absolute-left q-mt-lg q-ml-md q-pl-xl"
+        <span class="text-white absolute-left q-mt-lg q-ml-md q-pl-xl"
           >Çıldırttır</span
         >
       </q-toolbar-title>
 
       <q-icon name="fas fa-dog" size="lg" color="white" class="q-pa-md" />
-      <q-list class="text-white">
+      <q-list class="text-grey-6">
         <q-item
           clickable
           v-ripple
           to="/"
           exact
           class="text-h6"
-          active-class=" text-weight-bold text-grey-6"
+          active-class=" text-weight-bold text-white "
         >
           <q-item-section avatar>
             <q-icon name="cottage" size="md" />
@@ -54,7 +68,7 @@
           to="/about"
           exact
           class="text-h6"
-          active-class="text-weight-bold text-grey-6"
+          active-class="text-weight-bold text-white"
         >
           <q-item-section avatar>
             <q-icon name="fas fa-question-circle" size="md" />
@@ -68,8 +82,8 @@
       show-if-above
       v-model="rightDrawerOpen"
       side="right"
-      style="border-left:1px solid #ffffff40"
       class="bg-black"
+      style="border-top: 1px solid black"
     >
       <q-input
         class="q-ma-md"
@@ -143,7 +157,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view style="border: 1px solid #ffffff40" />
     </q-page-container>
   </q-layout>
 </template>

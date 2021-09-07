@@ -1,123 +1,129 @@
 <template>
-  <q-page class="text-white">
-    <div class="q-py-lg q-px-md row items-end q-col-gutter-md">
-      <div class="col">
-        <q-input
-          dark
-          autogrow
-          bottom-slots
-          v-model="newTweetContent"
-          label="Neler Oluyor ?"
-          counter
-          maxlength="280"
-          class="new-tweet"
-          color="primary"
-        >
-          <template v-slot:before>
-            <q-avatar size="xl">
-              <img src="https://avatars.githubusercontent.com/u/39746408?v=4" />
-            </q-avatar>
-          </template>
+  <q-page class="text-white relative-position">
+    <q-scroll-area class="absolute fullscreen">
+      <div class="q-py-lg q-px-md row items-end q-col-gutter-md">
+        <div class="col">
+          <q-input
+            dark
+            autogrow
+            bottom-slots
+            v-model="newTweetContent"
+            label="Neler Oluyor ?"
+            counter
+            maxlength="280"
+            class="new-tweet"
+            color="primary"
+          >
+            <template v-slot:before>
+              <q-avatar size="xl">
+                <img
+                  src="https://avatars.githubusercontent.com/u/39746408?v=4"
+                />
+              </q-avatar>
+            </template>
 
-          <template v-slot:append>
-            <q-icon
-              v-if="newTweetContent !== ''"
-              name="close"
-              @click="newTweetContent = ''"
-              class="cursor-pointer"
-              color="grey-6"
-            />
-          </template>
-        </q-input>
+            <template v-slot:append>
+              <q-icon
+                v-if="newTweetContent !== ''"
+                name="close"
+                @click="newTweetContent = ''"
+                class="cursor-pointer"
+                color="grey-6"
+              />
+            </template>
+          </q-input>
+        </div>
+        <div class="col col-shrink">
+          <q-btn
+            @click="addNewTweet"
+            :disable="!newTweetContent"
+            unelevated
+            rounded
+            color="primary"
+            label="Çıldırt"
+            class="q-mb-md"
+            no-caps
+          />
+        </div>
       </div>
-      <div class="col col-shrink">
-        <q-btn
-          @click="addNewTweet"
-          :disable="!newTweetContent"
-          unelevated
-          rounded
-          color="primary"
-          label="Çıldırt"
-          class="q-mb-md"
-          no-caps
-        />
-      </div>
-    </div>
-    <q-separator class="bg-grey-8" />
-
-    <q-list>
-      <transition-group
-        appear
-        enter-active-class="animated fadeIn slow"
-        leave-active-class="animated fadeOut slow"
-      >
-        <q-item
-          class="q-py-md"
-          v-for="item in tweets"
-          :key="item.date"
-          style="border-bottom: 1px solid #ffffff40"
+      <q-separator class="bg-grey-8" />
+      <q-list>
+        <transition-group
+          appear
+          enter-active-class="animated fadeIn slow"
+          leave-active-class="animated fadeOut slow"
         >
-          <q-item-section avatar top>
-            <q-avatar size="xl">
-              <img src="https://avatars.githubusercontent.com/u/39746408?v=4" />
-            </q-avatar>
-          </q-item-section>
+          <q-item
+            class="q-py-md"
+            v-for="item in tweets"
+            :key="item.date"
+            style="border-bottom: 1px solid #ffffff40"
+          >
+            <q-item-section avatar top>
+              <q-avatar size="xl">
+                <img
+                  src="https://avatars.githubusercontent.com/u/39746408?v=4"
+                />
+              </q-avatar>
+            </q-item-section>
 
-          <q-item-section>
-            <q-item-label class="text-subtitle1"
-              ><strong>Ulaş Can Demirbağ </strong>
-              <span class="text-grey-7"> @ulascan54</span>
-            </q-item-label>
-            <q-item-label class="tweet-content text-body-one">
-              {{ item.content }}
-            </q-item-label>
-            <div class="row justify-between q-mt-sm tweet-icons">
-              <q-btn
-                flat
-                round
-                color="grey-7"
-                icon="far fa-comment"
-                size="sm"
-                class="btn-action"
-              />
-              <q-btn
-                flat
-                round
-                color="grey-7"
-                icon="fas fa-retweet"
-                size="sm"
-                class="btn-action"
-              />
-              <q-btn
-                flat
-                round
-                color="grey-7"
-                icon="fas fa-heart"
-                size="sm"
-                class="btn-action"
-              />
-              <q-btn
-                @click="deleteTweet(item)"
-                flat
-                round
-                color="grey-7"
-                icon="fas fa-trash"
-                size="sm"
-                class="btn-action"
-              />
-            </div>
-          </q-item-section>
-          <q-item-section side top>
-            {{ relativeDate(item.date) }}
-          </q-item-section>
-        </q-item>
-      </transition-group>
-    </q-list>
+            <q-item-section>
+              <q-item-label class="text-subtitle1"
+                ><strong>Ulaş Can Demirbağ </strong>
+                <span class="text-grey-7">
+                  @ulascan54 <br class="lt-md" />
+                  &bull; {{ relativeDate(item.date) }}
+                </span>
+              </q-item-label>
+              <q-item-label class="tweet-content text-body-one">
+                {{ item.content }}
+              </q-item-label>
+              <div class="row justify-between q-mt-sm tweet-icons">
+                <q-btn
+                  flat
+                  round
+                  color="grey-7"
+                  icon="far fa-comment"
+                  size="sm"
+                  class="btn-action"
+                />
+                <q-btn
+                  flat
+                  round
+                  color="grey-7"
+                  icon="fas fa-retweet"
+                  size="sm"
+                  class="btn-action"
+                />
+                <q-btn
+                  flat
+                  round
+                  color="grey-7"
+                  icon="fas fa-heart"
+                  size="sm"
+                  class="btn-action"
+                />
+                <q-btn
+                  @click="deleteTweet(item)"
+                  flat
+                  round
+                  color="grey-7"
+                  icon="fas fa-trash"
+                  size="sm"
+                  class="btn-action"
+                />
+              </div>
+            </q-item-section>
+          </q-item>
+        </transition-group>
+      </q-list>
+    </q-scroll-area>
   </q-page>
 </template>
 
 <script>
 import { formatDistance } from "date-fns";
+
 export default {
   name: "PageHome",
   data() {
