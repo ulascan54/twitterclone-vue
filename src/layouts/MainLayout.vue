@@ -1,10 +1,10 @@
 <template>
   <q-layout view="lHr lpR fFf">
     <q-header bordered class="bg-black text-white">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+      <q-toolbar style="border-bottom:1px solid #ffffff40">
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer"  />
 
-        <q-toolbar-title class="text-weight-bold">
+        <q-toolbar-title class="text-weight-bold" >
           <span class="gt-sm">{{ $route.name }}</span>
           <q-icon
             name="fas fa-dog lt-md"
@@ -24,7 +24,7 @@
       :width="283"
       side="left"
       class="bg-black"
-      bordered
+       style="border-right:1px solid #ffffff40"
     >
       <q-toolbar-title class="text-weight-bold">
         <span class="lt-md text-white absolute-left q-mt-lg q-ml-md q-pl-xl"
@@ -68,7 +68,7 @@
       show-if-above
       v-model="rightDrawerOpen"
       side="right"
-      bordered
+      style="border-left:1px solid #ffffff40"
       class="bg-black"
     >
       <q-input
@@ -142,7 +142,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="bg-black text-white">
       <router-view />
     </q-page-container>
   </q-layout>
