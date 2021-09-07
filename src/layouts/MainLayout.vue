@@ -19,27 +19,70 @@
       bordered
     >
       <q-icon name="fas fa-dog" size="lg" color="white" class="q-pa-md" />
-      <q-list  class="text-white">
-
-        <q-item clickable v-ripple to="/"  >
+      <q-list class="text-white">
+        <q-item
+          clickable
+          v-ripple
+          to="/"
+          active-class="text-white text-weight-bold"
+        >
           <q-item-section avatar>
-            <q-icon  name="cottage"  size="md"/>
+            <q-icon name="cottage" size="md" />
           </q-item-section>
-          <q-item-section class="text-h6 text-weight-bold">Home</q-item-section>
+          <q-item-section class="text-h6">Home</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple to="/about">
+        <q-item
+          clickable
+          v-ripple
+          to="/about"
+          active-class="text-white text-weight-bold"
+        >
           <q-item-section avatar>
-            <q-icon  name="fas fa-question-circle"  size="md"/>
+            <q-icon name="fas fa-question-circle" size="md" />
           </q-item-section>
-          <q-item-section class="text-h6 text-weight-bold">About</q-item-section>
+          <q-item-section class="text-h6">About</q-item-section>
         </q-item>
-
       </q-list>
     </q-drawer>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- drawer content -->
+    <q-drawer
+      show-if-above
+      v-model="rightDrawerOpen"
+      side="right"
+      bordered
+      class="bg-black"
+    >
+      <q-input
+        class="q-ma-md"
+        color="primary"
+        bg-color="grey-9"
+        rounded
+        outlined
+        dense
+        label="Search"
+        label-color="white"
+      >
+        <template v-slot:prepend>
+          <q-icon name="search" color="white"/>
+        </template>
+      </q-input>
+      <q-list bordered padding>
+        <q-item>
+          <q-item-section>
+            <q-item-label overline>OVERLINE</q-item-label>
+            <q-item-label>Single line item</q-item-label>
+            <q-item-label caption
+              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
+              adipiscit elit.</q-item-label
+            >
+          </q-item-section>
+
+          <q-item-section side top>
+            <q-item-label caption>5 min ago</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
     </q-drawer>
 
     <q-page-container>
