@@ -98,8 +98,9 @@
                 <q-btn
                   flat
                   round
-                  color="grey-7"
-                  icon="fas fa-heart"
+                  :color="item.liked === true ? 'pink' : 'grey-7'"
+                  :icon="item.liked === true ? 'fas fa-heart' : 'far fa-heart'"
+                  @click="toggledLiked(item)"
                   size="sm"
                   class="btn-action"
                 />
@@ -135,11 +136,13 @@ export default {
         //   content:
         //     " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
         //   date: 1631040233608,
+        //   liked: false,
         // },
         // {
         //   content:
         //     " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio cum optio a saepe deleniti. Voluptate nemo, beatae iure corporis ullam sint alias est optio, illo, animi iusto quasi? Animi, dicta!",
         //   date: 1631050233608,
+        //   liked: true,
         // },
       ],
     };
@@ -153,50 +156,75 @@ export default {
       let newTweet = {
         content: this.newTweetContent,
         date: Date.now(),
+        liked: false,
       };
       // this.tweets.unshift(newTweet);
-      db.collection('tweets').add(newTweet).then(function(docRef){
-        console.log('Document written with ID:', docRef.id)
-      }).catch(function(error){
-        console.error('Error adding document:',error)
-      })
+      db.collection("tweets")
+        .add(newTweet)
+        .then(function (docRef) {
+          console.log("Document written with ID:", docRef.id);
+        })
+        .catch(function (error) {
+          console.error("Error adding document:", error);
+        });
       this.newTweetContent = "";
     },
     deleteTweet(tweet) {
       // let dateToDelete = tweet.date;
       // let index = this.tweets.findIndex((t) => t.date === dateToDelete);
       // this.tweets.splice(index, 1);
-        db.collection('tweets').doc(tweet.id).delete()
-        .then(function(){
-        console.log("Document successfully deleted !")})
-        .catch(function(error){
-        console.error('Error adding document:',error)
-      })
+      db.collection("tweets")
+        .doc(tweet.id)
+        .delete()
+        .then(function () {
+          console.log("Document successfully deleted !");
+        })
+        .catch(function (error) {
+          console.error("Error adding document:", error);
+        });
+    },
+    toggledLiked(item) {
+      item.liked = !item.liked;
+      db.collection("tweets")
+        .doc(item.id)
+        .update({ liked: item.liked })
+        .then(function () {
+          console.log("Document successfully updated!");
+        })
+        .catch(function (error) {
+          console.error("Error adding document:", error);
+        });
     },
   },
 
-mounted() {
-    db.collection('tweets').orderBy('date').onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
-        let tweetChance = change.doc.data()
-        tweetChance.id = change.doc.id
-        if (change.type === 'added') {
-          console.log('New tweet: ', tweetChance)
-          this.tweets.unshift(tweetChance)
-        }
-        if (change.type === 'modified') {
-          console.log('Modified tweet: ', tweetChance)
-          let index = this.tweets.findIndex(tweet => tweet.id === tweetChance.id)
-          Object.assign(this.qweets[index], tweetChance)
-        }
-        if (change.type === 'removed') {
-          console.log('Removed tweet: ', tweetChance)
-          let index = this.tweets.findIndex(tweet => tweet.id === tweetChance.id)
-          this.tweets.splice(index, 1)
-        }
-      })
-    })
-  }
+  mounted() {
+    db.collection("tweets")
+      .orderBy("date")
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          let tweetChance = change.doc.data();
+          tweetChance.id = change.doc.id;
+          if (change.type === "added") {
+            console.log("New tweet: ", tweetChance);
+            this.tweets.unshift(tweetChance);
+          }
+          if (change.type === "modified") {
+            console.log("Modified tweet: ", tweetChance);
+            let index = this.tweets.findIndex(
+              (tweet) => tweet.id === tweetChance.id
+            );
+            Object.assign(this.tweets[index], tweetChance);
+          }
+          if (change.type === "removed") {
+            console.log("Removed tweet: ", tweetChance);
+            let index = this.tweets.findIndex(
+              (tweet) => tweet.id === tweetChance.id
+            );
+            this.tweets.splice(index, 1);
+          }
+        });
+      });
+  },
 };
 </script>
 <style lang="sass">

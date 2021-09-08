@@ -21,10 +21,10 @@
         <q-toolbar-title class="text-weight-bold">
           <span class="gt-sm">{{ $route.name }}</span>
           <q-icon
-            name="fas fa-dove lt-md"
+            name="fas fa-dove "
             size="lg"
             color="white"
-            class="q-pa-md absolute-center"
+            class="q-pa-md absolute-center lt-md"
           />
         </q-toolbar-title>
 
