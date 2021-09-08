@@ -17,7 +17,7 @@
             <template v-slot:before>
               <q-avatar size="xl">
                 <img
-                  src="https://avatars.githubusercontent.com/u/39746408?v=4"
+                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.christliche-partner-suche.de%2Fuser_fotos%2F20311%2Flarge%2F20311_1_s4pev.jpg&f=1&nofb=1"
                 />
               </q-avatar>
             </template>
@@ -62,16 +62,16 @@
             <q-item-section avatar top>
               <q-avatar size="xl">
                 <img
-                  src="https://avatars.githubusercontent.com/u/39746408?v=4"
+                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.christliche-partner-suche.de%2Fuser_fotos%2F20311%2Flarge%2F20311_1_s4pev.jpg&f=1&nofb=1"
                 />
               </q-avatar>
             </q-item-section>
 
             <q-item-section>
               <q-item-label class="text-subtitle1"
-                ><strong>Ulaş Can Demirbağ </strong>
+                ><strong>Test User </strong>
                 <span class="text-grey-7">
-                  @ulascan54 <br class="lt-md" />
+                  @test123 <br class="lt-md" />
                   &bull; {{ relativeDate(item.date) }}
                 </span>
               </q-item-label>
